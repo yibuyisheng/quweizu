@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:orientation="horizontal"
+    android:background="#5f91c7" >
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text="@string/follow"
+        android:textColor="#F7F5F5"
+        android:background="@drawable/toolbar_button"
+        android:id="@+id/follow"/>
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text="@string/hot"
+        android:textColor="#F7F5F5"
+        android:background="@drawable/toolbar_button"
+        android:id="@+id/hot"/>
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text="@string/category"
+        android:textColor="#F7F5F5"
+        android:background="@drawable/toolbar_button"
+        android:id="@+id/category"/>
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.quweizu.view.blog.BlogVideoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+	<FrameLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center">
+	    
+	    <zl.android.view.imageview.MemorySafeImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:contentDescription="@string/app_name"
+	        android:id="@+id/blog_video_image"/>
+	    <zl.android.view.imageview.MemorySafeImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:contentDescription="@string/app_name"
+	        android:src="@drawable/video_s"/>
+	</FrameLayout>
+</com.quweizu.view.blog.BlogVideoLinearLayout>

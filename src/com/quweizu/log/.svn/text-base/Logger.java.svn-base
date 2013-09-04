@@ -1,0 +1,140 @@
+package com.quweizu.log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import zl.android.utils.ZLDateFormat;
+
+import android.os.Environment;
+import android.util.Log;
+
+class HttpLogger implements Runnable{
+	public String content="";
+	public String url = "http://192.168.0.106:3000/android/log";
+	public HttpLogger(String content){
+		this.content = content;
+	}
+	public void execute(){
+		Thread thread = new Thread(this);
+		thread.setDaemon(true);
+		thread.start();
+	}
+	@Override
+	public void run() {
+		try{
+			if(content!=null)url += "?content="+URLEncoder.encode(content,"UTF-8");
+			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+			conn.getResponseCode();
+			conn.setConnectTimeout(5000);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}
+public class Logger{
+	private static final int LOG_INFO=1;
+	private static final int LOG_WARN=2;
+	private static final int LOG_ERROR=3;
+	
+	private static String logTag = "quweizu";
+	private static String logPath = "quweizu"+File.separator;
+	
+	private static boolean debug = false;
+	private static void _writeToFile(String content) throws Exception{
+		if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) return;
+		
+		File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+logPath);
+		if(!file.exists()) file.mkdirs();
+		file = new File(file,"log.log");
+		FileOutputStream outStream = new FileOutputStream(file,true);
+		outStream.write((content+System.getProperty("line.separator")).getBytes());
+		outStream.close();
+	}
+	private static void _writeToServer(String content){
+		new HttpLogger(content).execute();
+	}
+	
+	
+	private static String _getBlanks(int n){
+		if(n <0) return "";
+		StringBuilder ret = new StringBuilder();
+		for(int i=0;i<n;i++){
+			ret.append(" ");
+		}
+		return ret.toString();
+	}
+	private static int threadNameLength=13;
+	private static void _log(int logKind,String msg,Throwable e){
+		if(!debug) return;
+		
+		StringBuilder out = new StringBuilder();
+		if(msg != null){
+			out.append(msg + "\n");
+		}
+		if(e != null){
+			out.append(e.getMessage()+"\n");
+			StackTraceElement[] elems = e.getStackTrace();
+			for(StackTraceElement elem : elems){
+				out.append(_getBlanks(8)+elem.toString()+"\n");
+			}
+		}
+		try{
+			String dateStr = ZLDateFormat.toFullDateTime(System.currentTimeMillis());
+			String threadName = Thread.currentThread().getName();
+			if(threadName.length()<threadNameLength){
+				threadName += _getBlanks(threadNameLength-threadName.length());
+			}
+			switch(logKind){
+			case LOG_INFO:
+				Log.i(logTag, out.toString());
+				_writeToFile(threadName+" "+dateStr+" "+" [INFO] "+out.toString());
+				_writeToServer(threadName+" "+dateStr+" "+" [INFO] "+out.toString());
+				break;
+			case LOG_WARN:
+				Log.w(logTag, out.toString());
+				_writeToFile(threadName+" "+dateStr+" "+" [WARN] "+out.toString());
+				_writeToServer(threadName+" "+dateStr+" "+" [WARN] "+out.toString());
+				break;
+			case LOG_ERROR:
+				Log.e(logTag, out.toString());
+				_writeToFile(threadName+" "+dateStr+" "+" [ERROR] "+out.toString());
+				_writeToServer(threadName+" "+dateStr+" "+" [ERROR] "+out.toString());
+				break;
+			}
+		}catch(Exception ex){
+			
+		}
+	}
+	public static void info(String msg){
+		_log(LOG_INFO,msg,null);
+	}
+	public static void info(Throwable e){
+		_log(LOG_INFO,null,e);
+	}
+	public static void info(String msg,Throwable e){
+		_log(LOG_INFO,msg,e);
+	}
+	
+	public static void warn(String msg){
+		_log(LOG_WARN,msg,null);
+	}
+	public static void warn(Throwable e){
+		_log(LOG_WARN,null,e);
+	}
+	public static void warn(String msg,Throwable e){
+		_log(LOG_WARN,msg,e);
+	}
+	
+	public static void error(String msg){
+		_log(LOG_ERROR,msg,null);
+	}
+	public static void error(Throwable e){
+		_log(LOG_ERROR,null,e);
+	}
+	public static void error(String msg,Throwable e){
+		_log(LOG_ERROR,msg,e);
+	}
+}

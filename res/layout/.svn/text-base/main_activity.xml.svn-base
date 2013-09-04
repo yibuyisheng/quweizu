@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_bg"
+    android:orientation="vertical" >
+	
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/attention_daren_box">
+        <zl.android.view.imageview.MemorySafeImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            android:contentDescription="@string/app_name"/>
+        <Button 
+	        android:layout_width="40dp"
+	        android:layout_height="40dp"
+	        android:layout_margin="10dp"
+	        android:layout_gravity="right|center_vertical"
+	        android:background="@drawable/camera"
+	        android:id="@+id/take_photo"/>
+    </FrameLayout>
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/contentContainer">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/categoryContainer"/>
+        <ProgressBar 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:id="@+id/category_load_progress"/>
+    </FrameLayout>
+    <include layout="@layout/main_toolbar"/>
+</LinearLayout>

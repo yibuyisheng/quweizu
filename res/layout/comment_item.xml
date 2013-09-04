@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.quweizu.view.blog.CommentItemLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+	<com.quweizu.view.user.UserHeadImage
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:contentDescription="@string/app_name"
+	    android:layout_margin="5dp"
+	    android:scaleType="fitXY"
+	    android:id="@+id/user_head"/>
+	<LinearLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="5dp"
+	    android:orientation="vertical">
+	    
+	    <LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="#0078B6"
+		        android:id="@+id/nick_name"/>
+		    <TextView 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:textColor="#666666"
+		        android:id="@+id/comment_time"/>
+	    </LinearLayout>
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/comment"/>
+	</LinearLayout>
+</com.quweizu.view.blog.CommentItemLinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dddddd"
+    android:orientation="vertical" >
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.quweizu.view.GroupListView
+		    android:layout_width="match_parent"
+		    android:layout_height="300dp"
+		    android:id="@+id/group_list"/>
+        <ProgressBar 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/group_load_progress"/>
+    </FrameLayout>
+	<TextView 
+	    android:layout_width="match_parent"
+	    android:layout_height="1dp"
+	    android:background="#dddddd"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/close"
+        android:id="@+id/cancel"/>
+    <!-- <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:text="@string/comment_loading"
+        android:id="@+id/comment_loading"/> -->
+</LinearLayout>

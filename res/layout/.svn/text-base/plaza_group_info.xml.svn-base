@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.quweizu.view.group.GroupInfoLinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/group_info_bar"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minHeight="30dp">
+	   <TextView
+	       android:layout_width="0dp"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="1"
+	       android:layout_gravity="center_vertical|left"
+	       android:id="@+id/group_brief"/>
+	   <com.quweizu.view.group.FollowGroupButton
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_vertical|right"
+		    android:drawableLeft="@drawable/add"
+		    android:visibility="gone"
+		    android:background="@drawable/follow_group_button"
+		    android:text="@string/follow_this_group"
+		    android:id="@+id/follow_group"/>
+    </LinearLayout>
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#cdcdcd"/>
+</com.quweizu.view.group.GroupInfoLinearLayout>
